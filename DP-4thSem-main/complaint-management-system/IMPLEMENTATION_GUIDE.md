@@ -1,5 +1,7 @@
 # Implementation Guide
 
+> **Note:** The webpaths detailed in this document are incomplete. The correct webpath should be like @[DP-4thSem-main/complaint-management-system/stitch_webpath.txt].
+
 ## Project Overview
 
 This guide helps you implement the Smart Complaint Management System (SCMS) step by step.

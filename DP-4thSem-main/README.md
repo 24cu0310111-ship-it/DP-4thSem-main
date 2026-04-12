@@ -1,5 +1,7 @@
 # Smart Complaint Management System (SCMS)
 
+> **Note:** The webpaths detailed in this document are incomplete. The correct webpath should be like @[DP-4thSem-main/complaint-management-system/stitch_webpath.txt].
+
 A high-fidelity, responsive landing page for the Smart Complaint Management System (SCMS), designed to replicate the Stitch prototype with pixel-perfect accuracy.
 
 ## Features

@@ -1,5 +1,7 @@
 # Smart Complaint Management System (SCMS)
 
+> **Note:** The webpaths detailed in this document are incomplete. The correct webpath should be like @[DP-4thSem-main/complaint-management-system/stitch_webpath.txt].
+
 ## Overview
 An AI-driven complaint management platform for urban residential and commercial areas that leverages LangChain and Sarvam AI for intelligent problem classification, prioritization, and resolution coordination.
 

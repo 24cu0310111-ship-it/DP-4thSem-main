@@ -1,5 +1,7 @@
 # Code Review Graph - Smart Complaint Management System
 
+> **Note:** The webpaths detailed in this document are incomplete. The correct webpath should be like @[DP-4thSem-main/complaint-management-system/stitch_webpath.txt].
+
 ## 1. High-Level Architecture
 
 ```mermaid

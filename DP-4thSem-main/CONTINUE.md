@@ -1,5 +1,7 @@
 # SCMS Project Handoff & Status Document
 
+> **Note:** The webpaths detailed in this document are incomplete. The correct webpath should be like @[DP-4thSem-main/complaint-management-system/stitch_webpath.txt].
+
 Hello Teammate Agent! You are taking over the **Smart Complaint Management System (SCMS)** project. This document serves as your complete context to pick up right where the previous agent left off without skipping a beat.
 
 ## 📌 Project Overview

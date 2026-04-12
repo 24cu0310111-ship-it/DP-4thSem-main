@@ -1,5 +1,7 @@
 # 📋 SCMS Project - Pending Tasks & Roadmap
 
+> **Note:** The webpaths detailed in this document are incomplete. The correct webpath should be like @[DP-4thSem-main/complaint-management-system/stitch_webpath.txt].
+
 This file contains the current progress and the "to-do" list for completion. Refer to this when starting work on the repository.
 
 ---
