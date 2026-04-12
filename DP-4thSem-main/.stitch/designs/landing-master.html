@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SCMS | Smart Complaint Management System</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style type="text/tailwindcss">
+        :root {
+            --industrial-yellow: #fbbf24;
+            --industrial-orange: #f59e0b;
+            --industrial-red: #ef4444;
+            --command-bg: #0a0a0c;
+            --command-surface: #14151a;
+            --command-border: #26272e;
+            --text-dim: #9ca3af;
+        }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: var(--command-bg); 
+            color: #e5e7eb; 
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 2px 2px, rgba(255,255,255,0.05) 1px, transparent 0);
+            background-size: 32px 32px;
+        }
+        .headline-font { font-family: 'Space Grotesk', sans-serif; letter-spacing: -0.02em; }
+        .label-font { font-family: 'Manrope', sans-serif; letter-spacing: 0.1em; text-transform: uppercase; }
+        .industrial-grid {
+            background-image: 
+                linear-gradient(to right, var(--command-border) 1px, transparent 1px),
+                linear-gradient(to bottom, var(--command-border) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+        .modular-card {
+            background: var(--command-surface);
+            border: 1px solid var(--command-border);
+            position: relative;
+        }
+        .modular-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 4px; height: 100%;
+            background: var(--industrial-yellow);
+            opacity: 0.5;
+        }
+        .danger-card::before { background: var(--industrial-red); }
+        .warning-card::before { background: var(--industrial-orange); }
+        .scanline {
+            width: 100%;
+            height: 100px;
+            z-index: 5;
+            background: linear-gradient(0deg, rgba(251, 191, 36, 0.05) 0%, rgba(251, 191, 36, 0) 100%);
+            position: absolute;
+            bottom: 0;
+            pointer-events: none;
+        }
+        .btn-industrial {
+            border: 1px solid var(--industrial-yellow);
+            background: rgba(251, 191, 36, 0.1);
+            color: var(--industrial-yellow);
+            clip-path: polygon(0 0, 100% 0, 100% 70%, 90% 100%, 0 100%);
+        }
+        .btn-industrial:hover {
+            background: var(--industrial-yellow);
+            color: #000;
+        }
+        .corner-accent {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-color: var(--industrial-yellow);
+        }
+    </style>
+</head>
+<body class="selection:bg-amber-500 selection:text-black">
+<nav class="fixed top-0 w-full z-[100] bg-black/80 backdrop-blur-md border-b border-[var(--command-border)]">
+<div class="flex justify-between items-center px-8 py-3 max-w-7xl mx-auto w-full">
+<div class="flex items-center gap-4">
+<div class="w-8 h-8 bg-amber-500 flex items-center justify-center font-black text-black">C</div>
+<div class="text-xl font-bold tracking-widest headline-font text-white">SCMS <span class="text-xs text-amber-500 font-mono">v4.0.2</span></div>
+</div>
+<div class="hidden md:flex gap-10 items-center">
+<a class="label-font text-xs font-bold text-amber-500" href="#">[ Solutions ]</a>
+<a class="label-font text-xs font-bold text-gray-500 hover:text-amber-500 transition-colors" href="#">[ Intel ]</a>
+<a class="label-font text-xs font-bold text-gray-500 hover:text-amber-500 transition-colors" href="#">[ Network ]</a>
+<a class="label-font text-xs font-bold text-gray-500 hover:text-amber-500 transition-colors" href="#">[ Pricing ]</a>
+</div>
+<button class="bg-amber-500 text-black px-5 py-1.5 label-font text-[10px] font-black hover:bg-white transition-colors">Get Started</button>
+</div>
+</nav>
+<header class="relative min-h-screen flex items-center justify-center pt-20 px-6 industrial-grid">
+<div class="absolute inset-0 bg-gradient-to-b from-transparent to-[var(--command-bg)]"></div>
+<div class="max-w-5xl text-center z-10">
+<div class="inline-flex items-center gap-2 border border-amber-500/30 bg-amber-500/5 px-4 py-1 mb-8">
+<span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+<span class="label-font text-[10px] text-amber-500">Intelligent Infrastructure Management // System Online</span>
+</div>
+<h1 class="headline-font text-5xl md:text-7xl font-black mb-8 text-white uppercase leading-none italic">
+            Smarter Complaint Management <br/><span class="text-amber-500 not-italic">Starts Here</span>
+</h1>
+<p class="font-body text-lg text-gray-400 max-w-2xl mx-auto mb-12 border-l-2 border-amber-500 pl-6 text-left">
+            Transform how residential and commercial areas handle issues — from electricity and water to sanitation and maintenance. Automated, intelligent, seamless.
+        </p>
+<div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+<button class="btn-industrial px-12 py-4 label-font font-black tracking-widest text-sm">Get Started</button>
+<button class="border border-gray-700 bg-gray-800/50 text-gray-300 px-12 py-4 label-font text-sm hover:bg-gray-700 transition-all">View Demo</button>
+</div>
+</div>
+<div class="scanline"></div>
+</header>
+<section class="py-24 px-6 border-y border-[var(--command-border)]">
+<div class="max-w-7xl mx-auto">
+<div class="mb-16 border-l-4 border-red-500 pl-6">
+<span class="label-font text-red-500 text-xs font-bold">The Obstacles // System Inefficiencies</span>
+<h2 class="headline-font text-4xl font-black uppercase mt-2 italic">Fragmented Systems, Silent Users</h2>
+</div>
+<div class="grid md:grid-cols-3 gap-0">
+<div class="modular-card danger-card p-12 border-r-0">
+<span class="material-symbols-outlined text-red-500 text-5xl mb-6">schedule</span>
+<h3 class="headline-font text-2xl font-black uppercase mb-4 text-white">Response Delays</h3>
+<p class="text-gray-400 text-sm leading-relaxed font-mono">Manual logging creates bottlenecks that lead to days of unresolved utility outages.</p>
+</div>
+<div class="modular-card danger-card p-12 border-r-0">
+<span class="material-symbols-outlined text-red-500 text-5xl mb-6">search_off</span>
+<h3 class="headline-font text-2xl font-black uppercase mb-4 text-white">Poor Tracking</h3>
+<p class="text-gray-400 text-sm leading-relaxed font-mono">Users and admins lose track of status updates in a sea of emails and phone calls.</p>
+</div>
+<div class="modular-card danger-card p-12">
+<span class="material-symbols-outlined text-red-500 text-5xl mb-6">inventory</span>
+<h3 class="headline-font text-2xl font-black uppercase mb-4 text-white">Manual Processes</h3>
+<p class="text-gray-400 text-sm leading-relaxed font-mono">Paper trails and Excel sheets make reporting nearly impossible for facility managers.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="py-24 px-6 bg-black">
+<div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+<div class="border border-[var(--command-border)] p-10 bg-[var(--command-surface)] relative overflow-hidden">
+<div class="absolute top-0 right-0 p-2 text-[10px] font-mono text-amber-500/30">MODULE_A7-X</div>
+<span class="label-font text-amber-500 text-xs font-bold">The Protocol // SCMS Main Core</span>
+<h2 class="headline-font text-4xl font-black mt-4 mb-8 uppercase italic leading-tight">Introducing Smart Complaint Management</h2>
+<div class="space-y-8">
+<p class="text-lg text-gray-400 font-mono text-sm">Our AI-driven engine automatically categorizes incoming complaints using natural language processing, routing them to the correct department within seconds.</p>
+<ul class="space-y-4">
+<li class="flex items-center gap-4 text-amber-500">
+<div class="w-1 h-4 bg-amber-500"></div>
+<span class="label-font text-xs font-bold">Neural Ticket Categorization</span>
+</li>
+<li class="flex items-center gap-4 text-amber-500">
+<div class="w-1 h-4 bg-amber-500"></div>
+<span class="label-font text-xs font-bold">Dynamic Resource Allocation</span>
+</li>
+<li class="flex items-center gap-4 text-amber-500">
+<div class="w-1 h-4 bg-amber-500"></div>
+<span class="label-font text-xs font-bold">Predictive Maintenance Alerts</span>
+</li>
+</ul>
+</div>
+</div>
+<div class="relative p-1 border-2 border-dashed border-amber-500/20">
+<div class="aspect-video bg-[#050505] overflow-hidden border border-[var(--command-border)] flex items-center justify-center p-12">
+<div class="w-full font-mono text-[10px] text-amber-500 space-y-4">
+<div class="flex items-center justify-between border-b border-amber-500/20 pb-2">
+<span>DATA_STREAM_01 // ACTIVE</span>
+<span class="animate-pulse">● REC</span>
+</div>
+<div class="bg-amber-500/10 p-4 border-l-2 border-amber-500">
+<p class="mb-1">&gt; ANALYZING_COMPLAINT_9281</p>
+<p class="text-white opacity-60 italic">"Pipe burst in basement sector 4G..."</p>
+<div class="w-full bg-gray-900 h-1 mt-4">
+<div class="bg-amber-500 h-full w-2/3"></div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="border border-amber-500/20 p-4">
+<p class="text-[8px] uppercase">Confidence</p>
+<p class="text-xl font-black">98.4%</p>
+</div>
+<div class="border border-amber-500/20 p-4">
+<p class="text-[8px] uppercase">Target Sector</p>
+<p class="text-xl font-black">UTILITY</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="py-24 px-6 border-y border-[var(--command-border)] bg-[var(--command-surface)]">
+<div class="max-w-7xl mx-auto">
+<div class="text-center mb-24">
+<span class="label-font text-amber-500 font-bold border border-amber-500/50 px-4 py-1">Operational Flow // System Architecture</span>
+<h2 class="headline-font text-4xl font-black mt-6 uppercase">The Resolution Lifecycle</h2>
+</div>
+<div class="grid md:grid-cols-5 gap-0">
+<div class="border border-[var(--command-border)] p-8 text-center relative group overflow-hidden">
+<div class="text-5xl font-black text-amber-500/10 absolute -top-2 -left-2 italic">01</div>
+<div class="relative z-10">
+<div class="w-10 h-10 border border-amber-500 text-amber-500 flex items-center justify-center mx-auto mb-6 label-font font-black">1</div>
+<h4 class="headline-font font-black mb-2 uppercase text-white">Submit</h4>
+<p class="text-[10px] text-gray-500 label-font font-bold">Instant Logging</p>
+</div>
+</div>
+<div class="border border-[var(--command-border)] p-8 text-center relative md:border-l-0">
+<div class="text-5xl font-black text-amber-500/10 absolute -top-2 -left-2 italic">02</div>
+<div class="w-10 h-10 border border-gray-700 text-gray-500 flex items-center justify-center mx-auto mb-6 label-font font-black">2</div>
+<h4 class="headline-font font-black mb-2 uppercase text-white">Process</h4>
+<p class="text-[10px] text-gray-500 label-font font-bold">AI Analysis</p>
+</div>
+<div class="border border-[var(--command-border)] p-8 text-center relative md:border-l-0">
+<div class="text-5xl font-black text-amber-500/10 absolute -top-2 -left-2 italic">03</div>
+<div class="w-10 h-10 border border-gray-700 text-gray-500 flex items-center justify-center mx-auto mb-6 label-font font-black">3</div>
+<h4 class="headline-font font-black mb-2 uppercase text-white">Categorize</h4>
+<p class="text-[10px] text-gray-500 label-font font-bold">Department Tagging</p>
+</div>
+<div class="border border-[var(--command-border)] p-8 text-center relative md:border-l-0">
+<div class="text-5xl font-black text-amber-500/10 absolute -top-2 -left-2 italic">04</div>
+<div class="w-10 h-10 border border-gray-700 text-gray-500 flex items-center justify-center mx-auto mb-6 label-font font-black">4</div>
+<h4 class="headline-font font-black mb-2 uppercase text-white">Assign</h4>
+<p class="text-[10px] text-gray-500 label-font font-bold">Technician Dispatch</p>
+</div>
+<div class="border border-[var(--command-border)] p-8 text-center relative md:border-l-0">
+<div class="text-5xl font-black text-amber-500/10 absolute -top-2 -left-2 italic">05</div>
+<div class="w-10 h-10 border border-gray-700 text-gray-500 flex items-center justify-center mx-auto mb-6 label-font font-black">5</div>
+<h4 class="headline-font font-black mb-2 uppercase text-white">Resolve</h4>
+<p class="text-[10px] text-gray-500 label-font font-bold">Final Verification</p>
+</div>
+</div>
+</div>
+</section>
+<section class="py-24 px-6 industrial-grid">
+<div class="max-w-7xl mx-auto">
+<div class="mb-20">
+<h2 class="headline-font text-5xl font-black uppercase text-white italic tracking-tighter">Core Capabilities</h2>
+<div class="h-1 w-24 bg-amber-500 mt-4"></div>
+</div>
+<div class="grid md:grid-cols-3">
+<div class="modular-card p-8 border hover:bg-amber-500/5 transition-all group">
+<div class="flex justify-between items-start mb-10">
+<span class="material-symbols-outlined text-amber-500 text-4xl">monitoring</span>
+<span class="text-[10px] font-mono text-amber-500/30">CAP_01</span>
+</div>
+<h3 class="headline-font text-xl font-black mb-3 uppercase text-white group-hover:text-amber-500">Real-time Tracking</h3>
+<p class="text-gray-400 text-sm font-mono leading-relaxed">Visual transparency into every stage of a complaint's journey from submission to completion.</p>
+</div>
+<div class="modular-card warning-card p-8 border md:border-l-0 hover:bg-amber-500/5 transition-all group">
+<div class="flex justify-between items-start mb-10">
+<span class="material-symbols-outlined text-amber-500 text-4xl">psychology</span>
+<span class="text-[10px] font-mono text-amber-500/30">CAP_02</span>
+</div>
+<h3 class="headline-font text-xl font-black mb-3 uppercase text-white group-hover:text-amber-500">Smart Prioritization</h3>
+<p class="text-gray-400 text-sm font-mono leading-relaxed">Urgent utility failures are automatically flagged and bumped to the top of technician queues.</p>
+</div>
+<div class="modular-card p-8 border md:border-l-0 hover:bg-amber-500/5 transition-all group">
+<div class="flex justify-between items-start mb-10">
+<span class="material-symbols-outlined text-amber-500 text-4xl">space_dashboard</span>
+<span class="text-[10px] font-mono text-amber-500/30">CAP_03</span>
+</div>
+<h3 class="headline-font text-xl font-black mb-3 uppercase text-white group-hover:text-amber-500">User Dashboard</h3>
+<p class="text-gray-400 text-sm font-mono leading-relaxed">A centralized portal for residents to log issues, view history, and provide feedback.</p>
+</div>
+<div class="modular-card p-8 border border-t-0 hover:bg-amber-500/5 transition-all group">
+<div class="flex justify-between items-start mb-10">
+<span class="material-symbols-outlined text-amber-500 text-4xl">admin_panel_settings</span>
+<span class="text-[10px] font-mono text-amber-500/30">CAP_04</span>
+</div>
+<h3 class="headline-font text-xl font-black mb-3 uppercase text-white group-hover:text-amber-500">Admin Control Panel</h3>
+<p class="text-gray-400 text-sm font-mono leading-relaxed">High-level analytics and resource management for facility administrators and municipal leads.</p>
+</div>
+<div class="modular-card p-8 border border-t-0 md:border-l-0 hover:bg-amber-500/5 transition-all group">
+<div class="flex justify-between items-start mb-10">
+<span class="material-symbols-outlined text-amber-500 text-4xl">notifications_active</span>
+<span class="text-[10px] font-mono text-amber-500/30">CAP_05</span>
+</div>
+<h3 class="headline-font text-xl font-black mb-3 uppercase text-white group-hover:text-amber-500">Notifications</h3>
+<p class="text-gray-400 text-sm font-mono leading-relaxed">Automated SMS and Email alerts keeping all stakeholders informed at critical milestones.</p>
+</div>
+<div class="modular-card p-8 border border-t-0 md:border-l-0 hover:bg-amber-500/5 transition-all group">
+<div class="flex justify-between items-start mb-10">
+<span class="material-symbols-outlined text-amber-500 text-4xl">api</span>
+<span class="text-[10px] font-mono text-amber-500/30">CAP_06</span>
+</div>
+<h3 class="headline-font text-xl font-black mb-3 uppercase text-white group-hover:text-amber-500">API Integrations</h3>
+<p class="text-gray-400 text-sm font-mono leading-relaxed">Seamlessly connect with existing ERPs, payment gateways, and billing systems.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="py-24 px-6 bg-black">
+<div class="max-w-7xl mx-auto flex flex-col items-center">
+<div class="text-center mb-16">
+<span class="label-font text-amber-500 font-bold border-b-2 border-amber-500 pb-1">The Interface // OPS_COMMAND_V3</span>
+<h2 class="headline-font text-5xl font-black mt-6 uppercase italic">Command Your Infrastructure</h2>
+</div>
+<div class="w-full max-w-[1100px] bg-[#0c0c0e] border-2 border-[var(--command-border)] flex h-[650px] shadow-2xl relative overflow-hidden">
+<div class="absolute inset-0 pointer-events-none opacity-10 industrial-grid"></div>
+<div class="w-64 bg-black border-r border-[var(--command-border)] p-6 z-10">
+<div class="flex items-center gap-3 mb-12 border-b border-gray-800 pb-6">
+<div class="w-10 h-10 border border-amber-500 flex items-center justify-center text-amber-500 font-black">SYS</div>
+<div class="flex flex-col">
+<span class="font-black headline-font text-white text-xs uppercase tracking-widest">SCMS OS</span>
+<span class="text-[8px] text-green-500 font-mono uppercase">Status: Nominal</span>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex items-center gap-3 text-black bg-amber-500 px-3 py-2">
+<span class="material-symbols-outlined text-sm">dashboard</span>
+<span class="text-[10px] font-black uppercase">Dashboard</span>
+</div>
+<div class="flex items-center gap-3 text-gray-500 px-3 py-2 hover:bg-gray-900 transition-colors cursor-pointer border border-transparent hover:border-gray-800">
+<span class="material-symbols-outlined text-sm">report</span>
+<span class="text-[10px] font-black uppercase">Complaints</span>
+</div>
+<div class="flex items-center gap-3 text-gray-500 px-3 py-2 hover:bg-gray-900 transition-colors cursor-pointer border border-transparent hover:border-gray-800">
+<span class="material-symbols-outlined text-sm">group</span>
+<span class="text-[10px] font-black uppercase">Technicians</span>
+</div>
+<div class="flex items-center gap-3 text-gray-500 px-3 py-2 hover:bg-gray-900 transition-colors cursor-pointer border border-transparent hover:border-gray-800">
+<span class="material-symbols-outlined text-sm">bar_chart</span>
+<span class="text-[10px] font-black uppercase">Analytics</span>
+</div>
+</div>
+</div>
+<div class="flex-1 flex flex-col z-10">
+<header class="p-6 border-b border-[var(--command-border)] flex justify-between items-center bg-[#0a0a0c]">
+<div class="relative w-1/2">
+<input class="bg-black border border-gray-800 rounded-none px-4 py-2 text-[10px] font-mono w-full focus:border-amber-500 outline-none text-amber-500" placeholder="&gt; SEARCH_REGISTRY..." type="text"/>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex flex-col items-end">
+<span class="text-[8px] font-mono text-gray-500">OPERATOR_ID</span>
+<span class="text-[10px] font-black text-white uppercase">ADM_MARK_01</span>
+</div>
+<div class="w-10 h-10 border border-gray-800 bg-gray-900 flex items-center justify-center">
+<span class="material-symbols-outlined text-amber-500">person</span>
+</div>
+</div>
+</header>
+<div class="p-8 overflow-y-auto flex-1 bg-black">
+<div class="flex justify-between items-center mb-8">
+<h3 class="headline-font font-black text-2xl uppercase italic text-white">Recent Reports</h3>
+<div class="flex gap-2">
+<span class="w-2 h-2 bg-red-500"></span>
+<span class="w-2 h-2 bg-amber-500"></span>
+<span class="w-2 h-2 bg-green-500"></span>
+</div>
+</div>
+<table class="w-full text-left font-mono">
+<thead class="text-[10px] label-font text-gray-500 bg-gray-900/50">
+<tr>
+<th class="p-4 border border-gray-800">COMPLAINT_ID</th>
+<th class="p-4 border border-gray-800">CAT_TYPE</th>
+<th class="p-4 border border-gray-800">STATUS_LVL</th>
+<th class="p-4 border border-gray-800">PRIORITY</th>
+</tr>
+</thead>
+<tbody class="text-[11px]">
+<tr class="hover:bg-amber-500/5 transition-colors group">
+<td class="p-4 border border-gray-800 text-amber-500 font-black">#LOG-2940</td>
+<td class="p-4 border border-gray-800 text-white">Water Leakage</td>
+<td class="p-4 border border-gray-800"><span class="bg-red-500/20 text-red-500 px-2 py-0.5 border border-red-500/50">PENDING</span></td>
+<td class="p-4 border border-gray-800"><span class="text-red-500 font-black">CRITICAL</span></td>
+</tr>
+<tr class="hover:bg-amber-500/5 transition-colors">
+<td class="p-4 border border-gray-800 text-amber-500 font-black">#LOG-2938</td>
+<td class="p-4 border border-gray-800 text-white">Power Outage</td>
+<td class="p-4 border border-gray-800"><span class="bg-amber-500/20 text-amber-500 px-2 py-0.5 border border-amber-500/50">IN_PROG</span></td>
+<td class="p-4 border border-gray-800"><span class="text-amber-500 font-black">HIGH</span></td>
+</tr>
+<tr class="hover:bg-amber-500/5 transition-colors">
+<td class="p-4 border border-gray-800 text-amber-500 font-black">#LOG-2935</td>
+<td class="p-4 border border-gray-800 text-white">Elevator Maintenance</td>
+<td class="p-4 border border-gray-800"><span class="bg-blue-500/20 text-blue-400 px-2 py-0.5 border border-blue-500/50">RESOLVED</span></td>
+<td class="p-4 border border-gray-800"><span class="text-gray-500 font-black">MEDIUM</span></td>
+</tr>
+<tr class="hover:bg-amber-500/5 transition-colors">
+<td class="p-4 border border-gray-800 text-amber-500 font-black">#LOG-2930</td>
+<td class="p-4 border border-gray-800 text-white">HVAC Failure</td>
+<td class="p-4 border border-gray-800"><span class="bg-amber-500/20 text-amber-500 px-2 py-0.5 border border-amber-500/50">IN_PROG</span></td>
+<td class="p-4 border border-gray-800"><span class="text-amber-500 font-black">HIGH</span></td>
+</tr>
+</tbody>
+</table>
+<div class="mt-8 grid grid-cols-4 gap-4">
+<div class="bg-gray-900 p-4 border border-gray-800">
+<span class="text-[8px] text-gray-500 uppercase">Load Avg</span>
+<div class="text-xl font-black text-green-500">24%</div>
+</div>
+<div class="bg-gray-900 p-4 border border-gray-800">
+<span class="text-[8px] text-gray-500 uppercase">Net Latency</span>
+<div class="text-xl font-black text-amber-500">12ms</div>
+</div>
+<div class="bg-gray-900 p-4 border border-gray-800">
+<span class="text-[8px] text-gray-500 uppercase">AI Threads</span>
+<div class="text-xl font-black text-white">512</div>
+</div>
+<div class="bg-gray-900 p-4 border border-gray-800">
+<span class="text-[8px] text-gray-500 uppercase">Uptime</span>
+<div class="text-xl font-black text-white">99.9%</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="py-24 px-6 border-t border-[var(--command-border)] bg-[var(--command-surface)]">
+<div class="max-w-7xl mx-auto">
+<div class="mb-16">
+<h2 class="headline-font text-4xl font-black uppercase text-white italic">Built for Performance</h2>
+<div class="w-16 h-1 bg-amber-500 mt-2"></div>
+</div>
+<div class="grid md:grid-cols-3 gap-0">
+<div class="p-12 border border-[var(--command-border)] bg-black/50">
+<h3 class="label-font text-amber-500 mb-6 text-xs font-black">Frontend Engine // UI_CORE</h3>
+<p class="headline-font text-3xl font-black mb-4 text-white uppercase italic">React Next.js</p>
+<p class="text-sm text-gray-500 font-mono">Edge-optimized responsiveness and real-time UI synchronization.</p>
+</div>
+<div class="p-12 border border-[var(--command-border)] md:border-l-0 bg-black/50">
+<h3 class="label-font text-orange-500 mb-6 text-xs font-black">Backend Intelligence // AI_MOD</h3>
+<p class="headline-font text-3xl font-black mb-4 text-white uppercase italic">Python &amp; FastAPI</p>
+<p class="text-sm text-gray-500 font-mono">Robust AI processing pipelines and high-concurrency complaint handling.</p>
+</div>
+<div class="p-12 border border-[var(--command-border)] md:border-l-0 bg-black/50">
+<h3 class="label-font text-red-500 mb-6 text-xs font-black">Data Persistence // STORE_DB</h3>
+<p class="headline-font text-3xl font-black mb-4 text-white uppercase italic">PostgreSQL &amp; Redis</p>
+<p class="text-sm text-gray-500 font-mono">ACID-compliant storage paired with ultra-low latency caching.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="py-24 px-6 border-t border-[var(--command-border)] bg-black">
+<div class="max-w-7xl mx-auto">
+<div class="text-center mb-24">
+<span class="label-font text-amber-500 font-bold">Success Stories // Field Reports</span>
+<h2 class="headline-font text-5xl font-black mt-6 uppercase italic tracking-tighter">Trusted Across Sectors</h2>
+</div>
+<div class="grid md:grid-cols-3 gap-8">
+<div class="border border-[var(--command-border)] bg-[var(--command-surface)] p-10 relative">
+<div class="absolute top-4 right-4 opacity-5">
+<span class="material-symbols-outlined text-6xl">format_quote</span>
+</div>
+<p class="text-gray-300 leading-relaxed mb-10 italic font-mono text-sm border-l border-amber-500 pl-4">"I logged a water leakage at 8 AM and it was fixed by 10 AM. The tracking feature meant I didn't have to keep calling the office."</p>
+<div class="flex items-center gap-4 border-t border-gray-800 pt-6">
+<div class="w-10 h-10 border border-amber-500/50 flex items-center justify-center">
+<span class="material-symbols-outlined text-amber-500">person</span>
+</div>
+<div>
+<p class="font-black headline-font text-white uppercase text-sm">Sarah Chen</p>
+<p class="text-[9px] label-font text-gray-500">Resident, Skyview Towers</p>
+</div>
+</div>
+</div>
+<div class="border border-[var(--command-border)] bg-[var(--command-surface)] p-10 relative">
+<div class="absolute top-4 right-4 opacity-5">
+<span class="material-symbols-outlined text-6xl">format_quote</span>
+</div>
+<p class="text-gray-300 leading-relaxed mb-10 italic font-mono text-sm border-l border-orange-500 pl-4">"Management overhead has dropped by 40%. We no longer lose complaints in sticky notes or missed emails. Everything is central."</p>
+<div class="flex items-center gap-4 border-t border-gray-800 pt-6">
+<div class="w-10 h-10 border border-orange-500/50 flex items-center justify-center">
+<span class="material-symbols-outlined text-orange-500">domain</span>
+</div>
+<div>
+<p class="font-black headline-font text-white uppercase text-sm">Marcus Thorne</p>
+<p class="text-[9px] label-font text-gray-500">Manager, Elite Estates</p>
+</div>
+</div>
+</div>
+<div class="border border-[var(--command-border)] bg-[var(--command-surface)] p-10 relative">
+<div class="absolute top-4 right-4 opacity-5">
+<span class="material-symbols-outlined text-6xl">format_quote</span>
+</div>
+<p class="text-gray-300 leading-relaxed mb-10 italic font-mono text-sm border-l border-red-500 pl-4">"The automated categorization saves hours of manual work. We can prioritize critical utility repairs before they become outages."</p>
+<div class="flex items-center gap-4 border-t border-gray-800 pt-6">
+<div class="w-10 h-10 border border-red-500/50 flex items-center justify-center">
+<span class="material-symbols-outlined text-red-500">engineering</span>
+</div>
+<div>
+<p class="font-black headline-font text-white uppercase text-sm">Elena Rodriguez</p>
+<p class="text-[9px] label-font text-gray-500">Facility Admin, Central Mall</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="py-24 px-6 border-t border-[var(--command-border)] industrial-grid">
+<div class="max-w-3xl mx-auto relative z-10">
+<div class="text-center mb-16">
+<h2 class="headline-font text-5xl font-black uppercase italic text-white tracking-tighter">Ready to Modernize?</h2>
+<p class="mt-4 text-gray-400 font-mono text-sm uppercase tracking-widest border-b border-amber-500/20 inline-block pb-2">Request a tailored demo for your property or enterprise.</p>
+</div>
+<form class="bg-black border-2 border-[var(--command-border)] p-12 shadow-2xl relative">
+<div class="absolute top-0 right-0 p-4 font-mono text-[10px] text-amber-500/20">FORM_REQUEST_SECURE</div>
+<div class="grid md:grid-cols-2 gap-8 mb-8">
+<div class="relative group">
+<label class="label-font text-[10px] text-amber-500 mb-2 block font-black">Full Name</label>
+<input class="w-full bg-gray-900 border border-gray-800 rounded-none px-4 py-4 focus:ring-0 focus:border-amber-500 text-white font-mono text-sm outline-none transition-all" placeholder="John Doe" type="text"/>
+</div>
+<div class="relative group">
+<label class="label-font text-[10px] text-amber-500 mb-2 block font-black">Email Address</label>
+<input class="w-full bg-gray-900 border border-gray-800 rounded-none px-4 py-4 focus:ring-0 focus:border-amber-500 text-white font-mono text-sm outline-none transition-all" placeholder="john@example.com" type="email"/>
+</div>
+</div>
+<div class="mb-8 group">
+<label class="label-font text-[10px] text-amber-500 mb-2 block font-black">Organization Type</label>
+<select class="w-full bg-gray-900 border border-gray-800 rounded-none px-4 py-4 focus:ring-0 focus:border-amber-500 text-white font-mono text-sm outline-none transition-all appearance-none">
+<option>Residential Society</option>
+<option>Commercial Complex</option>
+<option>Municipal Body</option>
+<option>Industrial Area</option>
+</select>
+</div>
+<div class="mb-8 group">
+<label class="label-font text-[10px] text-amber-500 mb-2 block font-black">Message</label>
+<textarea class="w-full bg-gray-900 border border-gray-800 rounded-none px-4 py-4 h-32 focus:ring-0 focus:border-amber-500 text-white font-mono text-sm outline-none transition-all" placeholder="Tell us about your management needs..."></textarea>
+</div>
+<button class="w-full btn-industrial py-5 label-font font-black tracking-[0.2em] text-lg" type="submit">Submit Inquiry</button>
+</form>
+</div>
+</section>
+<footer class="bg-black w-full border-t border-[var(--command-border)]">
+<div class="flex flex-col md:flex-row justify-between items-center px-12 py-12 w-full max-w-7xl mx-auto">
+<div class="flex flex-col items-center md:items-start mb-8 md:mb-0">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-6 h-6 bg-amber-500"></div>
+<div class="text-xl font-black text-white headline-font tracking-tighter">SCMS</div>
+</div>
+<p class="label-font text-[9px] tracking-[0.1em] text-gray-600 font-bold">© 2024 SCMS Obsidian Protocol. Secure Terminal Access Only.</p>
+</div>
+<div class="flex gap-10">
+<a class="label-font text-[10px] text-gray-500 hover:text-amber-500 transition-all font-black" href="#">[ Privacy ]</a>
+<a class="label-font text-[10px] text-gray-500 hover:text-amber-500 transition-all font-black" href="#">[ Terms ]</a>
+<a class="label-font text-[10px] text-gray-500 hover:text-amber-500 transition-all font-black" href="#">[ Security ]</a>
+<a class="label-font text-[10px] text-gray-500 hover:text-amber-500 transition-all font-black" href="#">[ Status ]</a>
+</div>
+</div>
+</footer>
+
+</body></html>

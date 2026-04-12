@@ -1,0 +1,16 @@
+SCMS Landing page
+     |
+     |(after pressing "Get Started" button)
+     Login page
+     |
+     |--User
+     |   |--User complaint History
+     |   |--AI Chat intake
+     |--Admin
+          |--Admin Dashboard
+          |--Admin complaint Console
+                    |
+                    |(After pressing "view details" button)
+                    |--provider selection-variation 1 
+                    |--provider selection-variation 2
+                    |--provider selection-variation 3

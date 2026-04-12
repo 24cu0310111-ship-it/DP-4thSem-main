@@ -1,0 +1,31 @@
+# FastAPI & Web
+fastapi>=0.109.0,<1.0
+uvicorn[standard]>=0.27.0,<1.0
+python-multipart>=0.0.6
+
+# Database - MongoDB
+motor>=3.3.2,<4.0
+pymongo>=4.6.1,<5.0
+
+# Validation
+pydantic>=2.5.3,<3.0
+pydantic-settings>=2.1.0,<3.0
+email-validator>=2.0.0
+
+# Authentication
+python-jose[cryptography]>=3.3.0
+passlib[bcrypt]>=1.7.4
+bcrypt>=4.0.0
+
+# AI & LangChain
+langchain>=0.1.0,<0.2
+langchain-core>=0.1.16,<0.2
+langchain-community>=0.0.10,<0.1
+langchain-openai>=0.0.5,<0.1
+
+# HTTP Client (for Sarvam AI)
+httpx>=0.26.0,<1.0
+
+# Utilities
+python-dotenv>=1.0.0
+structlog>=24.1.0

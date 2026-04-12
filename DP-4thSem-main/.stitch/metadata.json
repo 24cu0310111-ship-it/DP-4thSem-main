@@ -1,0 +1,49 @@
+{
+  "name": "projects/4322261519944648783",
+  "projectId": "4322261519944648783",
+  "title": "SCMS",
+  "visibility": "PUBLIC",
+  "createTime": "2026-04-01T18:01:21.733424Z",
+  "updateTime": "2026-04-04T13:10:29.579254Z",
+  "projectType": "TEXT_TO_UI_PRO",
+  "origin": "STITCH",
+  "deviceType": "DESKTOP",
+  "designTheme": {
+    "colorMode": "DARK",
+    "font": "SPACE_GROTESK",
+    "roundness": "ROUND_EIGHT",
+    "customColor": "#bbc3ff",
+    "headlineFont": "SPACE_GROTESK",
+    "bodyFont": "INTER",
+    "labelFont": "MANROPE"
+  },
+  "screens": {
+    "landing-feedback": {
+      "id": "0f24cbd5f3fc4a4d999e39ff7f6c7ec5",
+      "sourceScreen": "projects/4322261519944648783/screens/0f24cbd5f3fc4a4d999e39ff7f6c7ec5",
+      "x": 5609,
+      "y": 28,
+      "width": 1280,
+      "height": 7163
+    },
+    "landing-master": {
+      "id": "2491c149f7fe4995b6491761bbe67d9c",
+      "sourceScreen": "projects/4322261519944648783/screens/2491c149f7fe4995b6491761bbe67d9c",
+      "x": 7016,
+      "y": 76,
+      "width": 1280,
+      "height": 6960
+    },
+    "master-prompt-ref": {
+      "id": "fbffd585dad44b61b22923c1bee83831",
+      "sourceScreen": "projects/4322261519944648783/screens/fbffd585dad44b61b22923c1bee83831",
+      "x": 3447,
+      "y": 242,
+      "width": 600,
+      "height": 600
+    }
+  },
+  "metadata": {
+    "userRole": "OWNER"
+  }
+}
