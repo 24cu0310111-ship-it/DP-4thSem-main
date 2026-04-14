@@ -68,7 +68,7 @@ export default function AdminLayout() {
               </div>
             </div>
           )}
-          <button onClick={handleLogout} className={`flex items-center gap-3 px-4 py-2.5 rounded-obsidian text-sm text-error hover:bg-error-container/10 transition-all w-full ${collapsed ? 'justify-center' : ''}`}>
+          <button onClick={handleLogout} className={`flex items-center gap-3 px-4 py-2.5 rounded-obsidian border border-error/20 bg-error/5 text-sm font-medium text-error hover:bg-error/10 hover:border-error/30 shadow-sm transition-all w-full ${collapsed ? 'justify-center' : ''}`}>
             <span className="material-symbols-outlined text-xl">logout</span>
             {!collapsed && 'Sign Out'}
           </button>
@@ -78,9 +78,14 @@ export default function AdminLayout() {
       {/* Mobile top bar */}
       <div className="md:hidden fixed top-0 left-0 right-0 z-50 bg-surface-container-low border-b border-outline-variant/10 flex items-center justify-between px-4 py-3">
         <NavLink to="/" className="text-lg font-display font-bold text-on-surface">SCMS</NavLink>
-        <button onClick={() => setMobileOpen(!mobileOpen)} className="text-on-surface-variant">
-          <span className="material-symbols-outlined">{mobileOpen ? 'close' : 'menu'}</span>
-        </button>
+        <div className="flex items-center gap-2">
+          <button onClick={handleLogout} className="text-error bg-error/5 p-1.5 rounded-obsidian border border-error/20 hover:bg-error/10 flex items-center justify-center transition-all" title="Sign Out">
+            <span className="material-symbols-outlined text-xl">logout</span>
+          </button>
+          <button onClick={() => setMobileOpen(!mobileOpen)} className="text-on-surface-variant p-1.5 hover:bg-surface-container rounded-obsidian transition-all flex items-center justify-center">
+            <span className="material-symbols-outlined">{mobileOpen ? 'close' : 'menu'}</span>
+          </button>
+        </div>
       </div>
 
       {/* Mobile drawer */}

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { complaintService } from '../services/complaintService';
 import { useComplaints } from '../hooks/useComplaints';
 import type { PriorityLevel, ComplaintCategory } from '../types';
 
@@ -25,6 +26,24 @@ export default function AdminComplaintConsole() {
   const { complaints, isLoading } = useComplaints('admin');
   const navigate = useNavigate();
   const [search, setSearch] = useState('');
+  const [updating, setUpdating] = useState<Set<string>>(new Set());
+
+  const handleMarkInProgress = async (id: string, e: React.MouseEvent) => {
+    e.stopPropagation();
+    try {
+      setUpdating((prev) => new Set(prev).add(id));
+      await complaintService.updateStatus(id, 'in_progress');
+      window.location.reload(); 
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setUpdating((prev) => {
+        const next = new Set(prev);
+        next.delete(id);
+        return next;
+      });
+    }
+  };
   const [categoryFilter, setCategoryFilter] = useState<string>('all');
   const [priorityFilter, setPriorityFilter] = useState<string>('all');
 
@@ -108,10 +127,13 @@ export default function AdminComplaintConsole() {
                     <td className="px-6 py-4 text-sm text-primary-container font-medium">{c.complaint_id}</td>
                     <td className="px-6 py-4">
                       <p className="text-sm text-on-surface">{c.user?.name || '—'}</p>
-                      <p className="text-xs text-on-surface-variant">{c.user?.address?.area}</p>
+                      <p className="text-xs text-on-surface-variant flex items-center gap-1 mt-0.5">
+                        <span className="material-symbols-outlined text-[12px]">location_on</span>
+                        {c.location && c.location.includes(',') ? c.location : c.user?.address?.area || c.location}
+                      </p>
                     </td>
                     <td className="px-6 py-4 text-sm text-on-surface capitalize">{c.category}</td>
-                    <td className="px-6 py-4 text-sm text-on-surface-variant max-w-[200px] truncate">{c.description}</td>
+                    <td className="px-6 py-4 text-sm text-on-surface-variant max-w-[200px] truncate" title={c.description}>{c.description}</td>
                     <td className="px-6 py-4">
                       <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-label uppercase border ${PRIORITY_COLORS[c.priority_level]}`}>
                         {c.priority_level === 'critical' && <span className="w-1.5 h-1.5 rounded-full bg-error animate-pulse" />}
@@ -124,12 +146,23 @@ export default function AdminComplaintConsole() {
                       </span>
                     </td>
                     <td className="px-6 py-4">
-                      <button
-                        onClick={() => navigate(`/admin/complaints/${c.id}/providers`)}
-                        className="text-sm text-primary-container hover:text-primary font-medium transition-colors hover:underline"
-                      >
-                        View Details →
-                      </button>
+                      <div className="flex items-center gap-3">
+                        <button
+                          onClick={() => navigate(`/admin/complaints/${c.id}/providers`)}
+                          className="text-sm text-primary-container hover:text-primary font-medium transition-colors hover:underline"
+                        >
+                          View Details
+                        </button>
+                        {(c.status === 'open' || c.status === 'assigned') && (
+                          <button
+                            onClick={(e) => handleMarkInProgress(c.id, e)}
+                            disabled={updating.has(c.id)}
+                            className="bg-primary-container/10 text-primary-container text-xs px-3 py-1.5 rounded-full hover:bg-primary-container/20 transition-all font-medium disabled:opacity-50"
+                          >
+                            {updating.has(c.id) ? 'Updating...' : 'Start Progress'}
+                          </button>
+                        )}
+                      </div>
                     </td>
                   </tr>
                 ))}

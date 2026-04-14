@@ -17,6 +17,8 @@ export default function AIChatIntake() {
   const [isTyping, setIsTyping] = useState(false);
   const [sessionId, setSessionId] = useState<string | null>(null);
   const [lastAnalysis, setLastAnalysis] = useState<ChatMessage['metadata'] | null>(null);
+  const [detectedLocation, setDetectedLocation] = useState<string>('');
+  const [isLocating, setIsLocating] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -82,7 +84,7 @@ export default function AIChatIntake() {
       const { data } = await api.post('/user/chat/file-complaint', {
         session_id: sessionId,
         category: lastAnalysis?.detected_category || undefined,
-        location: '',
+        location: detectedLocation || '', // Use exact GPS coordinates if available
       });
 
       setMessages((prev) => [
@@ -111,6 +113,36 @@ export default function AIChatIntake() {
     } finally {
       setIsTyping(false);
     }
+  };
+
+  const handleDetectLocation = () => {
+    if (!navigator.geolocation) {
+      alert("Geolocation is not supported by your browser");
+      return;
+    }
+    setIsLocating(true);
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        const { latitude, longitude } = pos.coords;
+        const coordsStr = `${latitude.toFixed(5)}, ${longitude.toFixed(5)}`;
+        setDetectedLocation(coordsStr);
+        setIsLocating(false);
+        setMessages((prev) => [
+          ...prev,
+          {
+            id: String(Date.now()),
+            role: 'user',
+            content: `📍 Location pinned: ${coordsStr}`,
+            timestamp: new Date().toISOString(),
+          },
+        ]);
+      },
+      (err) => {
+        console.error('Location error:', err);
+        setIsLocating(false);
+        alert("Failed to get location. Please ensure location services are enabled.");
+      }
+    );
   };
 
   const handleSend = () => {
@@ -208,12 +240,22 @@ export default function AIChatIntake() {
 
         {/* Input */}
         <div className="px-6 py-4 border-t border-outline-variant/10 bg-surface-container-low">
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
             <button className="p-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container rounded-obsidian transition-all" title="Attach file">
               <span className="material-symbols-outlined">attach_file</span>
             </button>
             <button className="p-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container rounded-obsidian transition-all" title="Voice input">
               <span className="material-symbols-outlined">mic</span>
+            </button>
+            <button 
+              onClick={handleDetectLocation}
+              disabled={isLocating}
+              className={`p-2 rounded-obsidian transition-all ${detectedLocation ? 'bg-primary-container/10 text-primary-container' : 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container'} ${isLocating ? 'animate-pulse' : ''}`} 
+              title="Detect Precise Location"
+            >
+              <span className="material-symbols-outlined">
+                {detectedLocation ? 'location_on' : 'my_location'}
+              </span>
             </button>
             <input
               type="text"

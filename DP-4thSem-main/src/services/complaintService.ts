@@ -210,4 +210,14 @@ export const complaintService = {
     const { data } = await api.get<{ timeline: TimelineEvent[] }>(`/user/complaints/${complaintId}/timeline`);
     return data.timeline;
   },
+
+  async updateStatus(id: string, status: ComplaintStatus, note?: string): Promise<{ message: string }> {
+    if (USE_MOCK) {
+      const idx = MOCK_COMPLAINTS.findIndex(c => c.id === id || c.complaint_id === id);
+      if (idx !== -1) MOCK_COMPLAINTS[idx].status = status;
+      return { message: 'Status updated (mock)' };
+    }
+    const { data } = await api.put<{ message: string }>(`/admin/complaints/${id}/status`, { status, note });
+    return data;
+  },
 };

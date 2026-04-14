@@ -18,6 +18,25 @@ const PLATFORM_COLORS: Record<Platform, { bg: string; text: string }> = {
   local: { bg: 'bg-on-surface-variant/10', text: 'text-on-surface-variant' },
 };
 
+const getProviderIcon = (services: string[]) => {
+  const s = services.join(' ').toLowerCase();
+  if (s.includes('electrical') || s.includes('wire')) return 'bolt';
+  if (s.includes('plumb') || s.includes('leak') || s.includes('drain')) return 'plumbing';
+  if (s.includes('hvac') || s.includes('ac_') || s.includes('cool')) return 'ac_unit';
+  if (s.includes('secur') || s.includes('lock')) return 'lock';
+  return 'handyman';
+};
+
+function generatePrice(providerId: string, range: string) {
+  // deterministic random based on id
+  let hash = 0;
+  for (let i = 0; i < providerId.length; i++) hash = providerId.charCodeAt(i) + ((hash << 5) - hash);
+  const base = Math.abs(hash) % 200;
+  if (range === '$') return 250 + base;
+  if (range === '$$') return 450 + base * 2;
+  return 850 + base * 3;
+}
+
 export default function ProviderSelection() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
@@ -25,6 +44,7 @@ export default function ProviderSelection() {
   const [loading, setLoading] = useState(true);
   const [platformFilter, setPlatformFilter] = useState<string>('all');
   const [sortBy, setSortBy] = useState<'rating' | 'price' | 'response'>('rating');
+  const [livePrices, setLivePrices] = useState<Record<string, number>>({});
 
   const { providers, isLoading: providersLoading } = useProviders(
     complaint?.category,
@@ -38,6 +58,29 @@ export default function ProviderSelection() {
       setLoading(false);
     }).catch(() => setLoading(false));
   }, [id]);
+
+  useEffect(() => {
+    if (!providers?.length) return;
+    const initialPrices: Record<string, number> = {};
+    providers.forEach(p => initialPrices[p.id] = generatePrice(p.id, p.price_range));
+    setLivePrices(initialPrices);
+
+    // Live fluctuating price ticker
+    const interval = setInterval(() => {
+      setLivePrices(prev => {
+        const next = { ...prev };
+        // Randomly pick a few providers to slightly fluctuate
+        Object.keys(next).forEach(k => {
+          if (Math.random() > 0.7) {
+            next[k] = next[k] + (Math.floor(Math.random() * 9) - 4); // Fluctuate by +/- 4 rupees
+          }
+        });
+        return next;
+      });
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [providers]);
 
   const filteredProviders = providers
     .filter((p) => platformFilter === 'all' || p.platform === platformFilter)
@@ -172,7 +215,7 @@ export default function ProviderSelection() {
                   <div className="flex items-start justify-between mb-3">
                     <div className="flex items-center gap-3">
                       <div className="w-11 h-11 rounded-obsidian bg-surface-container-high flex items-center justify-center">
-                        <span className="material-symbols-outlined text-on-surface-variant">handyman</span>
+                        <span className="material-symbols-outlined text-on-surface-variant">{getProviderIcon(provider.service_types)}</span>
                       </div>
                       <div>
                         <p className="text-sm font-body font-medium text-on-surface">{provider.name}</p>
@@ -198,8 +241,13 @@ export default function ProviderSelection() {
                       </p>
                     </div>
                     <div>
-                      <p className="label-caps text-[10px] text-on-surface-variant mb-0.5">Price</p>
-                      <p className="text-sm text-on-surface font-medium">{provider.price_range}</p>
+                      <p className="label-caps text-[10px] text-on-surface-variant mb-0.5 flex items-center gap-1">
+                        <span className="w-1.5 h-1.5 bg-success rounded-full animate-pulse shadow-success"></span>
+                        Live Est. Price
+                      </p>
+                      <p className="text-sm text-on-surface font-medium transition-colors duration-300">
+                        ₹{livePrices[provider.id] || provider.price_range}
+                      </p>
                     </div>
                     <div>
                       <p className="label-caps text-[10px] text-on-surface-variant mb-0.5">Response</p>

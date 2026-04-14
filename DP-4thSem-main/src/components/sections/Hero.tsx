@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { heroData } from '../../data/mockData';
 
 export interface HeroProps {
@@ -36,13 +37,22 @@ export const Hero: React.FC<HeroProps> = ({ className = '' }) => {
           </p>
 
           {/* Buttons */}
-          <div className="flex gap-4 mb-16">
-            <button className="bg-blue-600 text-white font-semibold px-8 py-3.5 rounded-xl hover:bg-blue-700 transition-all text-sm shadow-lg shadow-blue-600/20">
-              {heroData.primaryCta}
-            </button>
-            <button className="bg-white text-navy font-semibold px-8 py-3.5 rounded-xl border border-slate-200 hover:border-slate-300 hover:bg-slate-50 transition-all text-sm">
+          <div className="flex flex-wrap gap-4 mb-16">
+            <Link 
+              to="/login"
+              className="group relative inline-flex items-center gap-2 bg-blue-600 text-white font-semibold px-8 py-3.5 rounded-xl hover:bg-blue-700 hover:-translate-y-0.5 transition-all duration-300 text-sm shadow-lg shadow-blue-600/25 hover:shadow-blue-600/40"
+            >
+              <span className="relative z-10">{heroData.primaryCta}</span>
+              <span className="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform relative z-10">arrow_forward</span>
+            </Link>
+            <Link
+              to="/login"
+              state={{ isProvider: true }} 
+              className="group inline-flex items-center gap-2 bg-white text-navy font-semibold px-8 py-3.5 rounded-xl border border-slate-200 hover:border-blue-200 hover:text-blue-700 hover:-translate-y-0.5 hover:bg-blue-50/50 transition-all duration-300 text-sm shadow-sm"
+            >
+              <span className="material-symbols-outlined text-[18px] group-hover:scale-110 transition-transform">handshake</span>
               {heroData.secondaryCta}
-            </button>
+            </Link>
           </div>
 
           {/* Stats row */}
