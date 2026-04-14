@@ -194,4 +194,17 @@
     font-family: 'Space Grotesk', sans-serif;
     letter-spacing: -0.04em;
   }
+
+  /* ===== Landing Page Specific (Ported HTML) ===== */
+  .headline-font { font-family: 'Space Grotesk', sans-serif; letter-spacing: -0.04em; }
+  .label-font { font-family: 'Manrope', sans-serif; letter-spacing: 0.05em; text-transform: uppercase; }
+  .executive-shadow { box-shadow: 0 20px 50px -12px rgba(0, 43, 91, 0.12); }
+  .glass-light { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.3); }
+  .data-gradient { background: linear-gradient(135deg, #002B5B 0%, #2563EB 100%); }
+  .mesh-bg { 
+      background-color: #ffffff;
+      background-image: radial-gradient(at 0% 0%, hsla(210,100%,98%,1) 0, transparent 50%), 
+                        radial-gradient(at 50% 0%, hsla(217,91%,95%,1) 0, transparent 50%), 
+                        radial-gradient(at 100% 0%, hsla(190,100%,95%,1) 0, transparent 50%);
+  }
 }

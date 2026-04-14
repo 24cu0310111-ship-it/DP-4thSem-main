@@ -20,6 +20,20 @@ export default {
           variant: '#34343a',
           tint: '#bbc3ff',
         },
+        // ===== Landing Page HTML Colors =====
+        lp: {
+          primary: '#002B5B',
+          secondary: '#2563EB',
+          tertiary: '#00D1FF',
+          surface: '#FFFFFF',
+          'surface-container': '#F8FAFC',
+          'surface-container-high': '#F1F5F9',
+          'on-surface': '#0F172A',
+          'on-surface-variant': '#475569',
+          outline: '#E2E8F0',
+          error: '#DC2626',
+          success: '#059669',
+        },
         // ===== Primary — Electric Blue =====
         primary: {
           DEFAULT: '#dfe1ff',
